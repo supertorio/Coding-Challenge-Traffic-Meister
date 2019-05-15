@@ -1,0 +1,17 @@
+.Dropdown {
+    display: block;
+}
+
+.Dropdown label {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.Dropdown .Dropdown--Select {
+    display: block;
+    margin-top: 8px;
+}
+
+.Dropdown .Dropdown--Select option {
+    text-transform: capitalize;
+}

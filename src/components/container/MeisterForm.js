@@ -1,8 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { loadTrafficMeisterData } from '../../actions/meister-form-actions';
-import Dropdown from '../controls/Dropdown';
+import {getMeisterDataLoading, getMeisterDataReady} from "../../reducers/index-reducer";
+
+import VehicleTypeSelector from '../controls/VehicleTypeSelector';
+import VehicleBrandSelector from '../controls/VehicleBrandSelector';
+import VehicleColorSelector from '../controls/VehicleColorSelector';
+import LoadingIndicator from '../LoadingIndicator';
+import ResultsDisplay from '../ResultsDisplay';
+
+import './MeisterForm.css';
 
 class MeisterForm extends Component{
 
@@ -13,12 +21,18 @@ class MeisterForm extends Component{
     render() {
         return(
             <div className="MeisterForm">
-                <p>Traffic Meister</p>
-                <p>Loading: {this.props.loading ? "Yes" : "No"}</p>
-
-                <Dropdown label="Vehicle Type" />
-                <Dropdown label="Brand" />
-                <Dropdown label="Colors" />
+                <h1>Traffic Meister</h1>
+                {this.props.loading && <LoadingIndicator />}
+                {this.props.ready &&
+                    <Fragment>
+                        <div className="SelectorGroup">
+                            <VehicleTypeSelector />
+                            <VehicleBrandSelector />
+                            <VehicleColorSelector />
+                        </div>
+                        <ResultsDisplay />
+                    </Fragment>
+                }
             </div>
         );
     }
@@ -26,8 +40,9 @@ class MeisterForm extends Component{
 
 const mapStateToProps = state => {
     return {
-        loading: state.meister.get('loading')
-    }
+        loading: getMeisterDataLoading(state),
+        ready: getMeisterDataReady(state),
+    };
 };
 
 const mapDispatchToProps = {
