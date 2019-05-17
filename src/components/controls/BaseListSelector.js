@@ -24,7 +24,7 @@ const styles = theme => ({
     }
 });
 
-const BaseListSelector = (props) => {
+export const BaseListSelector = (props) => {
     return (
         <div className={props.classes.root}>
             <Typography component="h2" variant="h5" gutterBottom>{props.label}</Typography>
