@@ -1,42 +1,65 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, Fragment} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import {withStyles} from '@material-ui/core/styles';
 
-import { loadTrafficMeisterData } from '../../actions/meister-form-actions';
+import {loadTrafficMeisterData} from '../../actions/meister-form-actions';
 import {getMeisterDataLoading, getMeisterDataReady} from "../../reducers/index-reducer";
-
-import VehicleTypeSelector from '../controls/VehicleTypeSelector';
-import VehicleBrandSelector from '../controls/VehicleBrandSelector';
-import VehicleColorSelector from '../controls/VehicleColorSelector';
 import LoadingIndicator from '../LoadingIndicator';
+import VehicleSelectorGroup from '../controls/VehicleSelectorGroup';
 import ResultsDisplay from '../ResultsDisplay';
 
-import './MeisterForm.css';
+const styles = theme => ({
+   container: {
+       width: '100%',
+       padding: 20,
+   }
+});
 
-class MeisterForm extends Component{
+class MeisterForm extends Component {
 
     componentDidMount() {
         this.props.loadTrafficMeisterData();
     }
 
     render() {
-        return(
+        return (
             <div className="MeisterForm">
-                <h1>Traffic Meister</h1>
-                {this.props.loading && <LoadingIndicator />}
-                {this.props.ready &&
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography variant="h6" color="inherit">
+                            Traffic Meister
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <div className={this.props.classes.container}>
+                    {this.props.loading && <LoadingIndicator/>}
+                    {this.props.ready &&
                     <Fragment>
-                        <div className="SelectorGroup">
-                            <VehicleTypeSelector />
-                            <VehicleBrandSelector />
-                            <VehicleColorSelector />
-                        </div>
-                        <ResultsDisplay />
+                        <VehicleSelectorGroup />
+                        <ResultsDisplay/>
                     </Fragment>
-                }
+                    }
+                </div>
             </div>
         );
     }
 }
+
+MeisterForm.propTypes = {
+    classes: PropTypes.object.isRequired,
+    loading: PropTypes.bool,
+    ready: PropTypes.bool,
+    loadTrafficMeisterData: PropTypes.func.isRequired,
+};
+
+MeisterForm.defaultProps = {
+    loading: false,
+    ready: false,
+};
 
 const mapStateToProps = state => {
     return {
@@ -52,4 +75,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MeisterForm);
+)(withStyles(styles)(MeisterForm));
