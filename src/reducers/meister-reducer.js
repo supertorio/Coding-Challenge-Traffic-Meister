@@ -1,17 +1,18 @@
 import {List, Map} from 'immutable';
 
 import {DEFAULT_SELECT_VALUE, DEFAULT_SELECTION_LIST} from '../constants/meister-consts';
+import {filterTypeList, filterBrandList, filterColorList} from '../utils/meister-filters';
 import {
     CHANGE_VEHICLE_BRAND,
     CHANGE_VEHICLE_COLOR,
     CHANGE_VEHICLE_TYPE,
     FETCH_MEISTER_DATA,
     MEISTER_DATA_LOADED,
+    CLEAR_TYPE_SELECTION,
+    CLEAR_BRAND_SELECTION,
+    CLEAR_COLOR_SELECTION,
     RESET_FORM,
 } from '../actions/meister-form-actions';
-
-import {filterTypeList, filterBrandList, filterColorList} from '../utils/meister-filters';
-
 
 /**
  * Default Reducer State
@@ -30,7 +31,7 @@ export const defaultState = Map({
     })
 });
 
-
+// Meister Reducer Main
 export default (state = defaultState, action) => {
     switch (action.type) {
         case FETCH_MEISTER_DATA:
@@ -67,6 +68,24 @@ export default (state = defaultState, action) => {
                     filterTypeList(state.get('data'), state.get('selections').set('color', action.vehicleColor)))
                 .setIn(['filteredLists', 'brands'],
                     filterBrandList(state.get('data'), state.get('selections').set('color', action.vehicleColor)));
+
+        case CLEAR_TYPE_SELECTION:
+            return state.setIn(['selections', 'type'], DEFAULT_SELECT_VALUE)
+                .setIn(['filteredLists', 'types'], filterTypeList(state.get('data'), state.get('selections').set('type', DEFAULT_SELECT_VALUE)))
+                .setIn(['filteredLists', 'brands'], filterBrandList(state.get('data'), state.get('selections').set('type', DEFAULT_SELECT_VALUE)))
+                .setIn(['filteredLists', 'colors'], filterColorList(state.get('data'), state.get('selections').set('type', DEFAULT_SELECT_VALUE)));
+
+        case CLEAR_BRAND_SELECTION:
+            return state.setIn(['selections', 'brand'], DEFAULT_SELECT_VALUE)
+                .setIn(['filteredLists', 'types'], filterTypeList(state.get('data'), state.get('selections').set('brand', DEFAULT_SELECT_VALUE)))
+                .setIn(['filteredLists', 'brands'], filterBrandList(state.get('data'), state.get('selections').set('brand', DEFAULT_SELECT_VALUE)))
+                .setIn(['filteredLists', 'colors'], filterColorList(state.get('data'), state.get('selections').set('brand', DEFAULT_SELECT_VALUE)));
+
+        case CLEAR_COLOR_SELECTION:
+            return state.setIn(['selections', 'color'], DEFAULT_SELECT_VALUE)
+                .setIn(['filteredLists', 'types'], filterTypeList(state.get('data'), state.get('selections').set('color', DEFAULT_SELECT_VALUE)))
+                .setIn(['filteredLists', 'brands'], filterBrandList(state.get('data'), state.get('selections').set('color', DEFAULT_SELECT_VALUE)))
+                .setIn(['filteredLists', 'colors'], filterColorList(state.get('data'), state.get('selections').set('color', DEFAULT_SELECT_VALUE)));
 
         case RESET_FORM:
             return state.set('selections', DEFAULT_SELECTION_LIST)
