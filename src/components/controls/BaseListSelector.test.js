@@ -22,10 +22,29 @@ describe('<BaseListSelector />', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('should display the provided options', () => {
+        const wrapper = shallow(
+            <BaseListSelector label="Type"
+                              options={options}
+                              classes={classesMock}
+                              onChange={() => true} />
+        );
+
+        expect(wrapper.find(`ListItem[key="item-${options[0]}"]`).exists());
+        expect(wrapper.find(`ListItem[key="item-${options[1]}"]`).exists());
+        expect(wrapper.find(`ListItem[key="item-${options[2]}"]`).exists());
+    });
+
     it('should react to selection change', () => {
         const selectionMock = jest.fn();
-        const component = mount(<BaseListSelector label="Type" options={options} classes={classesMock} onChange={selectionMock} />);
-        component.find('ListItem').at(1).simulate('click');
+        const wrapper = mount(
+            <BaseListSelector label="Type"
+                              options={options}
+                              classes={classesMock}
+                              onChange={selectionMock} />
+        );
+
+        wrapper.find('ListItem').at(1).simulate('click');
         expect(selectionMock.mock.calls.length).toBe(1);
         expect(selectionMock.mock.calls[0][0]).toBe('opt a');
     });

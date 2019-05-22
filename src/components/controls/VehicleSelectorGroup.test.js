@@ -1,11 +1,11 @@
 import React from 'react';
-import LoadingIndicator from './LoadingIndicator';
+import VehicleSelectorGroup from './VehicleSelectorGroup';
 
-describe('<LoadingIndicator />', () => {
+describe('<VehicleSelectorGroup />', () => {
 
     it('should match the snapshot', () => {
         const wrapper = shallow(
-            <LoadingIndicator />,
+            <VehicleSelectorGroup />,
         );
         expect(wrapper).toMatchSnapshot();
     });

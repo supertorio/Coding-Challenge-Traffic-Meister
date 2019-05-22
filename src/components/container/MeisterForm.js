@@ -19,7 +19,7 @@ const styles = theme => ({
    }
 });
 
-class MeisterForm extends Component {
+export class MeisterForm extends Component {
 
     componentDidMount() {
         this.props.loadTrafficMeisterData();
@@ -40,7 +40,7 @@ class MeisterForm extends Component {
                     {this.props.ready &&
                     <Fragment>
                         <VehicleSelectorGroup />
-                        <ResultsDisplay/>
+                        <ResultsDisplay />
                     </Fragment>
                     }
                 </div>

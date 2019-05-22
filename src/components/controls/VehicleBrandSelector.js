@@ -7,7 +7,7 @@ import {getAvailableVehicleBrands, getCurrentVehicleBrand} from "../../reducers/
 import {changeVehicleBrandSelection} from "../../actions/meister-form-actions";
 import BaseListSelector from "./BaseListSelector";
 
-const VehicleBrandSelector = (props) => {
+export const VehicleBrandSelector = (props) => {
     return (
         <div className="Selector VehicleBrandSelector">
             <BaseListSelector label="Vehicle Brand"

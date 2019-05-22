@@ -31,7 +31,7 @@ const styles = theme => ({
     },
 });
 
-class ResultsDisplay extends PureComponent {
+export class ResultsDisplay extends PureComponent {
     render() {
         const {classes, selectedType, selectedBrand, selectedColor} = this.props;
         return (

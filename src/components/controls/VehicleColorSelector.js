@@ -7,7 +7,7 @@ import {getAvailableVehicleColors, getCurrentVehicleColor} from "../../reducers/
 import {changeVehicleColorSelection} from '../../actions/meister-form-actions';
 import BaseListSelector from "./BaseListSelector";
 
-const VehicleColorSelector = (props) => {
+export const VehicleColorSelector = (props) => {
     return (
         <div className="Selector VehicleColorSelector">
             <BaseListSelector label="Vehicle Color"
