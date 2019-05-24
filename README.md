@@ -1,5 +1,15 @@
 # Planes, trains and automobiles
 
+## Project Setup
+
+The project is setup using yarn/npm. After you clone the project from the repo, run ```yarn``` from the command line to download and install the project's dependencies.
+
+- To run the project locally, use ```yarn start``` from the command line.
+- To create a build for deployment, use ```yarn run build``` from the command line. The build will be available in the dist directory.
+- To run test suite, use ```yarn test``` from the command line.
+
+If you are using npm instead of yarn, run ```npm install``` to download the dependencies.  The rest of the commands remain the same by simply replacing 'yarn' with 'npm'.
+
 ## The Traffic Meister application assignment
 
  - Create a form which behaves as follows
