@@ -1,16 +1,16 @@
 import {List, Map} from 'immutable';
 
 import {DEFAULT_SELECT_VALUE, DEFAULT_SELECTION_LIST} from '../constants/meister-consts';
-import {filterTypeList, filterBrandList, filterColorList} from '../utils/meister-filters';
+import {filterBrandList, filterByTypeAndBrand, filterColorList, filterTypeList} from '../utils/meister-filters';
 import {
     CHANGE_VEHICLE_BRAND,
     CHANGE_VEHICLE_COLOR,
     CHANGE_VEHICLE_TYPE,
-    FETCH_MEISTER_DATA,
-    MEISTER_DATA_LOADED,
-    CLEAR_TYPE_SELECTION,
     CLEAR_BRAND_SELECTION,
     CLEAR_COLOR_SELECTION,
+    CLEAR_TYPE_SELECTION,
+    FETCH_MEISTER_DATA,
+    MEISTER_DATA_LOADED,
     RESET_FORM,
 } from '../actions/meister-form-actions';
 
@@ -111,3 +111,7 @@ export const selectCurrentVehicleColor = state => state.getIn(['selections', 'co
 export const selectFormHasSelections = state => state.getIn(['selections', 'type']) !== DEFAULT_SELECT_VALUE ||
     state.getIn(['selections', 'brand']) !== DEFAULT_SELECT_VALUE ||
     state.getIn(['selections', 'color']) !== DEFAULT_SELECT_VALUE;
+export const selectCurrentVehicleImage = state => {
+    const vehicle = filterByTypeAndBrand(state.get('data'), state.getIn(['selections', 'type']), state.getIn(['selections', 'brand']));
+    return vehicle ? vehicle.img : null;
+};

@@ -4,13 +4,15 @@ import {ResultsDisplay} from './ResultsDisplay';
 describe('<ResultsDisplay />', () => {
 
     const classesMock = {};
-    let selectedType, selectedBrand, selectedColor, formHasSelections;
+    let selectedType, selectedBrand, selectedColor, vehicleImage, formHasSelections;
 
     beforeEach(()=> {
         selectedType = 'car';
         selectedBrand = 'Bugatti Veyron';
         selectedColor = 'blue';
+        vehicleImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Bugatti_Veyron_16.4_%E2%80%93_Frontansicht_%281%29%2C_5._April_2012%2C_D%C3%BCsseldorf.jpg/520px-Bugatti_Veyron_16.4_%E2%80%93_Frontansicht_%281%29%2C_5._April_2012%2C_D%C3%BCsseldorf.jpg';
         formHasSelections = true;
+
     });
 
     it('should match the snapshot', () => {
@@ -19,6 +21,7 @@ describe('<ResultsDisplay />', () => {
                             selectedType={selectedType}
                             selectedBrand={selectedBrand}
                             selectedColor={selectedColor}
+                            vehicleImage={vehicleImage}
                             formHasSelections={true} />,
         );
 

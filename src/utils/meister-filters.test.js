@@ -1,4 +1,4 @@
-import {filterTypeList, filterBrandList, filterColorList} from './meister-filters';
+import {filterTypeList, filterBrandList, filterColorList, filterByTypeAndBrand} from './meister-filters';
 import {DEFAULT_SELECTION_LIST} from "../constants/meister-consts";
 import {List} from "immutable";
 
@@ -7,19 +7,22 @@ const MOCK_DATA = new List([
         id: 1,
         type: 'car',
         brand: 'Bugatti Veyron',
-        colors: ['red', 'black']
+        colors: ['red', 'black'],
+        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Bugatti_Veyron_16.4_%E2%80%93_Frontansicht_%281%29%2C_5._April_2012%2C_D%C3%BCsseldorf.jpg/520px-Bugatti_Veyron_16.4_%E2%80%93_Frontansicht_%281%29%2C_5._April_2012%2C_D%C3%BCsseldorf.jpg'
     },
     {
         id: 2,
         type: 'airplane',
         brand: 'Boeing 787 Dreamliner',
-        colors: ['red', 'white', 'black', 'green']
+        colors: ['red', 'white', 'black', 'green'],
+        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/All_Nippon_Airways_Boeing_787-8_Dreamliner_JA801A_OKJ_in_flight.jpg/600px-All_Nippon_Airways_Boeing_787-8_Dreamliner_JA801A_OKJ_in_flight.jpg'
     },
     {
         id: 3,
         type: 'train',
         brand: 'USRA 0-6-6',
-        colors: ['yellow', 'white', 'black']
+        colors: ['yellow', 'white', 'black'],
+        img: 'https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/UP_4466_Neil916.JPG/600px-UP_4466_Neil916.JPG'
     }
 ]);
 
@@ -117,4 +120,18 @@ describe('Color List Filter', () => {
         const actual = filterColorList(MOCK_DATA, DEFAULT_SELECTION_LIST.set('type', 'car').set('brand', 'Bugatti Veyron'));
         expect(actual).toEqual(expected);
     });
+});
+
+describe('filterByTypeAndBrand', () => {
+
+    it('should return an vehicle data if a match is found', () => {
+        const result = filterByTypeAndBrand(MOCK_DATA, 'car', 'Bugatti Veyron');
+        expect(result).toEqual(MOCK_DATA.get(0));
+    });
+
+    it('should return an null if match is not found', () => {
+        const result = filterByTypeAndBrand(MOCK_DATA, 'airplane', 'Bugatti Veyron');
+        expect(result).toEqual(null);
+    });
+
 });

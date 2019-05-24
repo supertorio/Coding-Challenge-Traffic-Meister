@@ -18,3 +18,4 @@ export const getMeisterFormHasSelections = state => meisterSelectors.selectFormH
 export const getCurrentVehicleType = state => meisterSelectors.selectCurrentVehicleType(state.get('meister'));
 export const getCurrentVehicleBrand = state => meisterSelectors.selectCurrentVehicleBrand(state.get('meister'));
 export const getCurrentVehicleColor = state => meisterSelectors.selectCurrentVehicleColor(state.get('meister'));
+export const getCurrentVehicleImage = state => meisterSelectors.selectCurrentVehicleImage(state.get('meister'));
